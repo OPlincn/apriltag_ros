@@ -1,5 +1,9 @@
 # apriltag_ros
 
+更改了config和launch
+
+
+
 `apriltag_ros` is a Robot Operating System (ROS) wrapper of the [AprilTag 3 visual fiducial detector](https://april.eecs.umich.edu/software/apriltag.html). For details and tutorials, please see the [ROS wiki](http://wiki.ros.org/apriltag_ros).
 
 `apriltag_ros` depends on the latest release of the [AprilTag library](https://github.com/AprilRobotics/apriltag). Clone it into your catkin workspace before building.
@@ -23,26 +27,6 @@ rosdep install --from-paths src --ignore-src -r -y  # Install any missing packag
 catkin build    # Build all packages in the workspace (catkin_make_isolated will work also)
 ```
 See the [ROS wiki](http://wiki.ros.org/apriltag_ros) for details and tutorials.
-
-## Tag Size Definition
-
-For a correct depth estimation (and hence the correct full pose) it is necessary to specify the tag size in config/tags.yaml correctly. In the [Wiki for the AprilTag Library](https://github.com/AprilRobotics/apriltag/wiki/AprilTag-User-Guide#pose-estimation)  the correct interpretation of the term "tag size" is explained. The size is defined by the length of the black/white border between the complete black and white rectangle of any tag type. Note that for apriltag3 marker families this does not in fact correspond to the outside of the marker.
-
-Below is a visualization of the tag size (red arrow) to be specified for the most common tag classes:
-![Tag Size Guide](./apriltag_ros/docs/tag_size_guide.svg)
-
-## Contributing
-
-Pull requests are welcome! Especially for the following areas:
-
-- Publishing of the AprilTag 3 algorithm intermediate images over a ROS image topic (which AprilTag 3 already generates when `tag_debug==1`)
-- Conversion of the bundle calibration script from MATLAB to Python
-- Extend calibration to support calibrating tags that cannot appear simultaneously with the master tag, but do appear simultaneously with other tags which themselves or via a similar relationship appear with the master tag (e.g. a bundle with the geometry of a cube - if the master is on one face, tags on the opposite face cannot currently be calibrated). This is basically "transform chaining" and potentially allows calibration of bundles with arbitrary geometry as long as a transform chain exists from any tag to the master tag
-- Supporting multiple tag family detection (currently all tags have to be of the same family). This means calling the detector once for each family. Because the core AprilTag 2 algorithm is the performance bottleneck, detection of `n` tag families will possibly decrease performance by `1/n` (tbd if this still holds for v3)
-
-## Changelog
-
-- In March 2019, the code was upgraded to AprilTag 3 and as thus the options `refine_pose`, `refine_decode`, and `black_border` were removed.
 
 ## Copyright
 
