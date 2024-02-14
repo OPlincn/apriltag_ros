@@ -2,7 +2,11 @@
 
 更改了config和launch
 
-
+2024.2.14  oplin 更改记录
+1. 将 `apriltag_ros` 中的去除重复逻辑进行了修改，
+现在当 `setting.yaml` 中不设置 `remove_duplicates`为false时，会自动去除检测到的多个同一id的tag，**并保留唯一一个此id的tag检测结果**。
+筛选的标准为： 当检测到多个同一id的tag时，会筛选出其中**面积最大**的那个tag作为结果。
+2. 将 `apriltag_ros` 中对图像增强的方式由*二值化*更改成了*提高对比度*，希望能实现在实地测试中更好的鲁棒性。
 
 `apriltag_ros` is a Robot Operating System (ROS) wrapper of the [AprilTag 3 visual fiducial detector](https://april.eecs.umich.edu/software/apriltag.html). For details and tutorials, please see the [ROS wiki](http://wiki.ros.org/apriltag_ros).
 
